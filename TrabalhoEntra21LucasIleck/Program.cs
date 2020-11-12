@@ -10,9 +10,7 @@ namespace TrabalhoEntra21LucasIleck
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Ola mundo");
-            Console.WriteLine("Testando git");
-            Console.WriteLine("teste pronto");
+           
         }
     }
 }
