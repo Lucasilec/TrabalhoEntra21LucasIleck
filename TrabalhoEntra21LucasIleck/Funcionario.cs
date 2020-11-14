@@ -26,7 +26,7 @@ namespace TrabalhoEntra21LucasIleck
         }
         public void MostraCargoSalario()
         {
-            Console.WriteLine($"Cargo do Funcionario: {Cargo}");        
+            Console.WriteLine($"Cargo do Funcionario: {Cargo} .Salario: {SalarioHours}");        
         }
         public void DefineCargoSalario(string cargo, double salario)
         {

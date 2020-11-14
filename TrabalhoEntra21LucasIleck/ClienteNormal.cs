@@ -8,6 +8,10 @@ namespace TrabalhoEntra21LucasIleck
 {
     class ClienteNormal
     {
+        public ClienteNormal()
+        {
+
+        }
         public ClienteNormal(string nome, string cpf, int idade, double saldo)
         {
             Nome = nome;
@@ -32,15 +36,15 @@ namespace TrabalhoEntra21LucasIleck
         }
 
         public virtual void MostrarDados()
-        {
+        { 
             Console.WriteLine($"Nome: {Nome} .CPF: {CPF} .Idade: {Idade} .Saldo: {GetSaldo()}");
         }
         public virtual void DefineDados(string nome, string cpf, int idade, double saldo)
         {
-            Nome = nome;
-            CPF = cpf;
-            Idade = idade;
-            SetSaldo(GetSaldo() + saldo);
+            Nome = Gerador.NomePessoa();
+            CPF = Gerador.Cpf();
+            Idade = Gerador.Idade();
+            SetSaldo(GetSaldo() + Gerador.Saldo());
         }
 
     }

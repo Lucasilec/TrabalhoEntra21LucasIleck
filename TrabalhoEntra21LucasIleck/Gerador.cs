@@ -21,8 +21,7 @@ namespace TrabalhoEntra21LucasIleck
         }
         // Gera um cpf no padrao 000.000.000-00
         public static string Cpf()
-        {
-
+        { 
             string cpf = "";
             for (int i = 1; i < 15; i++)
             {
