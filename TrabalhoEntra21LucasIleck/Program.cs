@@ -10,19 +10,17 @@ namespace TrabalhoEntra21LucasIleck
     {
         static void Main(string[] args)
         {
-            List<ClienteNormal> clientesList = new List<ClienteNormal>();
-            for (int i = 0; i < 5; i++)
-            {
-                ClienteNormal clienteNormal = new ClienteNormal(Gerador.NomePessoa(), Gerador.Cpf(), Gerador.Idade(), Gerador.Saldo());
-                clientesList.Add(clienteNormal); 
-               
-                
-            }
-            foreach (var item in clientesList)
-            {
-                Console.WriteLine("===================//===================");
-                item.MostrarDados();
-            }
+
+            Console.WriteLine("BEM VINDO A O MENU");
+            Console.WriteLine();
+            Console.WriteLine("ESCOLHA AS OPÇÕES: ");
+            Console.WriteLine("1 - ADICIONAR");
+            Console.WriteLine("2 - REMOVER");
+            Console.WriteLine("3 - COMPRAR");
+            Console.WriteLine("4 - BATER O CARTÃO");
+            Console.WriteLine("5 - ALTERAR");
+            Console.WriteLine("6 - CALCULAR LUCRO");
+            Console.WriteLine("7 - SAIR");
         }
     }
 }
