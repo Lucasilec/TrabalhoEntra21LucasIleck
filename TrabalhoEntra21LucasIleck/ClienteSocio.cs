@@ -8,9 +8,13 @@ namespace TrabalhoEntra21LucasIleck
 {
     class ClienteSocio : ClienteNormal
     {
+        public ClienteSocio()
+        {
+
+        }
         public ClienteSocio(double qtdAcoes, string nome, string cpf, int idade, double saldo) : base(nome, cpf, idade, saldo)
         {
-            QtdAcoes += qtdAcoes;
+            QtdAcoes = qtdAcoes;
         }
         private double QtdAcoes;
         public double GetQtdAcoes()

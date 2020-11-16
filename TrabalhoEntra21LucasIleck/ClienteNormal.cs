@@ -8,6 +8,13 @@ namespace TrabalhoEntra21LucasIleck
 {
     class ClienteNormal
     {
+        public string Nome { get; private set; }
+        public string CPF { get; private set; }
+        public int Idade { get; private set; }
+
+      
+
+        private double Saldo;
         public ClienteNormal()
         {
 
@@ -18,21 +25,15 @@ namespace TrabalhoEntra21LucasIleck
             CPF = cpf;
             Idade = idade;
             SetSaldo(GetSaldo() + saldo);
-        }
-        public string Nome { get; private set; }
-        public string CPF { get; private set; }
-        public int Idade { get; private set; }
-
-        private double saldo;
-
+        }   
         public double GetSaldo()
         {
-            return saldo;
+            return Saldo;
         }
 
         public void SetSaldo(double value)
         {
-            saldo = value;
+            Saldo = value;
         }
 
         public virtual void MostrarDados()
@@ -41,11 +42,10 @@ namespace TrabalhoEntra21LucasIleck
         }
         public virtual void DefineDados(string nome, string cpf, int idade, double saldo)
         {
-            Nome = Gerador.NomePessoa();
-            CPF = Gerador.Cpf();
-            Idade = Gerador.Idade();
-            SetSaldo(GetSaldo() + Gerador.Saldo());
+            Nome = nome;
+            CPF = cpf;
+            Idade = idade;
+            SetSaldo(GetSaldo() + saldo);
         }
-
     }
 }

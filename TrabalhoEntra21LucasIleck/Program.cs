@@ -8,8 +8,10 @@ namespace TrabalhoEntra21LucasIleck
 {
     class Program
     {
+       
         static void Main(string[] args)
         {
+
 
             Console.WriteLine("BEM VINDO A O MENU");
             Console.WriteLine();
