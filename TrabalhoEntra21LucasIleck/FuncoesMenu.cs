@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace TrabalhoEntra21LucasIleck
 {
-    class FuncoesMenu
+    static class FuncoesMenu
     {
-        List<ClienteNormal> ClienteNormalsList { get; set; } = new List<ClienteNormal>();
-        List<ClienteSocio> ClienteSociosList { get; set; } = new List<ClienteSocio>();
-        List<Funcionario> FuncionariosList { get; set; } = new List<Funcionario>();
-        List<Fornecedor> FornecedorsList { get; set; } = new List<Fornecedor>();
-        public void Escolha(int EscolhaOpcao)
+        static List<ClienteNormal> ClienteNormalsList { get; set; } = new List<ClienteNormal>();
+        static List<ClienteSocio> ClienteSociosList { get; set; } = new List<ClienteSocio>();
+        static List<Funcionario> FuncionariosList { get; set; } = new List<Funcionario>();
+        static List<Fornecedor> FornecedorsList { get; set; } = new List<Fornecedor>();
+        public static void Escolha(int EscolhaOpcao)
         {
             switch (EscolhaOpcao)
             {
@@ -41,7 +41,7 @@ namespace TrabalhoEntra21LucasIleck
                     break;
             }
         }
-        public void Adicionar()
+        public static void Adicionar()
         {
             Console.WriteLine("Insira oque será adicionado:");
             Console.WriteLine("1 - Cliente Normal: ");
@@ -121,7 +121,7 @@ namespace TrabalhoEntra21LucasIleck
             }
 
         }
-        public void Remover()
+        public static void Remover()
         {
             Console.WriteLine("Insira oque será removido:");
             Console.WriteLine("1 - Cliente Normal: ");
@@ -163,39 +163,62 @@ namespace TrabalhoEntra21LucasIleck
                     cpfVerificar = Console.In.ReadLine();
                     for (int i = 0; i < FuncionariosList.Count; i++)
                     {
-                        FuncionariosList.Remove(FuncionariosList[i]);
+                        if (FuncionariosList[i].CPF.CompareTo(cpfVerificar) == 0)
+                        {
+                            FuncionariosList.Remove(FuncionariosList[i]);
+                        }
                     }
                     break;
                 case 4:
                     Console.Clear();
-                    Console.WriteLine("Insira o CPF do Fornecedor: ");
+                    Console.WriteLine("Insira o Cnpj do Fornecedor: ");
                     cpfVerificar = Console.In.ReadLine();
                     for (int i = 0; i < FornecedorsList.Count; i++)
                     {
-                        FornecedorsList.Remove(FornecedorsList[i]);
+                        if (FornecedorsList[i].Cnpj.CompareTo(cpfVerificar) == 0)
+                        {
+                            FornecedorsList.Remove(FornecedorsList[i]);
+                        }
+                    }
+                    break;
+            }
+        }
+        public static void Comprar()
+        {
+            Console.Clear();
+            Console.WriteLine("Insira o Tipo de Cliente");
+            Console.WriteLine();
+            Console.WriteLine("1-Cliente Normal");
+            Console.WriteLine("2-Cliente Socio");
+            int escolherTipo = int.Parse(Console.In.ReadLine());
+            switch (escolherTipo)
+            {
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine("Lista de Cliente Normal");
+                    Console.WriteLine();
+                    foreach (var item in ClienteNormalsList)
+                    {
+                        Console.WriteLine(item);
                     }
                     break;
                 default:
                     break;
             }
         }
-        public void Comprar()
+        public static void BaterCartao()
         {
 
         }
-        public void BaterCartao()
+        public static void Alterar()
         {
 
         }
-        public void Alterar()
+        public static void CalcularLucro()
         {
 
         }
-        public void CalcularLucro()
-        {
-
-        }
-        public void Sair()
+        public static void Sair()
         {
             
         }

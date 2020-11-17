@@ -8,7 +8,7 @@ namespace TrabalhoEntra21LucasIleck
 {
     class Program
     {
-       
+
         static void Main(string[] args)
         {
 
@@ -23,6 +23,10 @@ namespace TrabalhoEntra21LucasIleck
             Console.WriteLine("5 - ALTERAR");
             Console.WriteLine("6 - CALCULAR LUCRO");
             Console.WriteLine("7 - SAIR");
+            int escolhaOpcao = int.Parse(Console.In.ReadLine());
+            FuncoesMenu.Escolha(escolhaOpcao);
+            
+            
         }
     }
 }
