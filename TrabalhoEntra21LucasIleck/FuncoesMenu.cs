@@ -129,15 +129,50 @@ namespace TrabalhoEntra21LucasIleck
             Console.WriteLine("3 - Funcionario: ");
             Console.WriteLine("4 - Fornecedor: ");
             int escolherOpcaoRemove = int.Parse(Console.In.ReadLine());
+            string cpfVerificar;
             switch (escolherOpcaoRemove)
             {
+                
                 case 1:
                     Console.Clear();
-                    Console.WriteLine("Insira o CPF do Cliente Normal: ");
-                    string cpfVerificar = Console.In.ReadLine();
+                    Console.Write("Insira o CPF do Cliente Normal: ");
+                    cpfVerificar = Console.In.ReadLine();
                     for (int i = 0; i < ClienteNormalsList.Count; i++)
                     {
-                        
+                        if (ClienteNormalsList[i].CPF.CompareTo(cpfVerificar) == 0)
+                        {
+                            ClienteNormalsList.Remove(ClienteNormalsList[i]);
+                        }
+                    }
+                    break;
+                case 2:
+                    Console.Clear();
+                    Console.Write("Insira o CPF do Cliente Socio: ");
+                    cpfVerificar = Console.In.ReadLine();
+                    for (int i = 0; i < ClienteSociosList.Count; i++)
+                    {
+                        if (ClienteSociosList[i].CPF.CompareTo(cpfVerificar) == 0)
+                        {
+                            ClienteSociosList.Remove(ClienteSociosList[i]); 
+                        }
+                    }
+                    break;
+                case 3:
+                    Console.Clear();
+                    Console.Write("Insira o CPF do Funcionario: ");
+                    cpfVerificar = Console.In.ReadLine();
+                    for (int i = 0; i < FuncionariosList.Count; i++)
+                    {
+                        FuncionariosList.Remove(FuncionariosList[i]);
+                    }
+                    break;
+                case 4:
+                    Console.Clear();
+                    Console.WriteLine("Insira o CPF do Fornecedor: ");
+                    cpfVerificar = Console.In.ReadLine();
+                    for (int i = 0; i < FornecedorsList.Count; i++)
+                    {
+                        FornecedorsList.Remove(FornecedorsList[i]);
                     }
                     break;
                 default:
