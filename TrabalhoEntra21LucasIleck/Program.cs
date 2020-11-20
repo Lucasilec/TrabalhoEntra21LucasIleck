@@ -11,8 +11,8 @@ namespace TrabalhoEntra21LucasIleck
 
         static void Main(string[] args)
         {
-
-
+            
+            
             Console.WriteLine("BEM VINDO A O MENU");
             Console.WriteLine();
             Console.WriteLine("ESCOLHA AS OPÇÕES: ");

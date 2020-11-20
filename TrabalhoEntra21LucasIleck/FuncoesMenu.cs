@@ -36,9 +36,7 @@ namespace TrabalhoEntra21LucasIleck
                     break;
                 case 7:
                     Sair();
-                    break;
-                default:
-                    break;
+                    break;                
             }
         }
         public static void Adicionar()
@@ -201,14 +199,70 @@ namespace TrabalhoEntra21LucasIleck
                     {
                         Console.WriteLine(item);
                     }
+                    Console.WriteLine("Insira o CPF do Cliente que esta comprando:");
+                    string cpfDoClienteNormal = Console.In.ReadLine();
+                    foreach (var item in ClienteNormalsList)
+                    {
+                        if (item.CPF.CompareTo(cpfDoClienteNormal) == 0)
+                        {
+                            Console.Clear();
+                            Console.WriteLine(item);
+                            Console.WriteLine();
+                            Console.WriteLine("Insira o valor da compra:");
+                            double valorDaCompra = double.Parse(Console.In.ReadLine());
+                            item.SetSaldo(item.GetSaldo() - valorDaCompra);
+                            Console.WriteLine(item.GetSaldo());
+                        }
+                    }
                     break;
-                default:
+                case 2:
+                    Console.Clear();
+                    Console.WriteLine("Lista de Cliente Socio");
+                    Console.WriteLine();
+                    foreach (var item in ClienteSociosList)
+                    {
+                        Console.WriteLine(item );
+                    }
+                    Console.WriteLine("Insira o CPF do Cliente que esta comprando");
+                    string cpfDoClienteSocio = Console.In.ReadLine();
+                    foreach (var item in ClienteSociosList)
+                    {
+                        if (item.CPF.CompareTo(cpfDoClienteSocio) == 0)
+                        {
+                            Console.Clear();
+                            Console.WriteLine(item);
+                            Console.WriteLine();
+                            Console.WriteLine("Insira o valor da compra: ");
+                            double valorDaCompra = double.Parse(Console.In.ReadLine());
+                            valorDaCompra = valorDaCompra - (valorDaCompra * 0.20);
+                            item.SetSaldo(item.GetSaldo() - valorDaCompra);
+                            Console.WriteLine(item.GetSaldo());
+                        }
+                    }
                     break;
             }
         }
         public static void BaterCartao()
         {
+            Console.WriteLine("Bater Cartão ponto: ");
+            Console.WriteLine();
+            foreach (var item in FuncionariosList)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("Insira o CPF do Funcionario que esta batendo o cartão: ");
+            string cpfFuncionario = Console.In.ReadLine();
+            foreach (var item in FuncionariosList)
+            {
+                if (item.CPF.CompareTo(cpfFuncionario) == 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine(item);
+                    Console.WriteLine();
+                    Console.WriteLine("O cliente está batendo o cartão do dia ou de 30 dias?");
 
+                }
+            }
         }
         public static void Alterar()
         {
