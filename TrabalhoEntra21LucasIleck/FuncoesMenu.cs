@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TrabalhoEntra21LucasIleck
 {
     static class FuncoesMenu
     {
-        static List<ClienteNormal> ClienteNormalsList { get; set; } = new List<ClienteNormal>();
-        static List<ClienteSocio> ClienteSociosList { get; set; } = new List<ClienteSocio>();
-        static List<Funcionario> FuncionariosList { get; set; } = new List<Funcionario>();
-        static List<Fornecedor> FornecedorsList { get; set; } = new List<Fornecedor>();
+        public static List<ClienteNormal> ClienteNormalsList { get; set; } = new List<ClienteNormal>();
+        public static List<ClienteSocio> ClienteSociosList { get; set; } = new List<ClienteSocio>();
+        public static List<Funcionario> FuncionariosList { get; set; } = new List<Funcionario>();
+        public static List<Fornecedor> FornecedorsList { get; set; } = new List<Fornecedor>();
         public static void Escolha(int EscolhaOpcao)
         {
             switch (EscolhaOpcao)
@@ -35,12 +36,15 @@ namespace TrabalhoEntra21LucasIleck
                     CalcularLucro();
                     break;
                 case 7:
-                    Sair();
-                    break;                
+                    Console.WriteLine("Obrigado por usar o programa! Saindo em 3S");
+                    Thread.Sleep(3000);
+                    Environment.Exit(0);
+                    break;
             }
         }
         public static void Adicionar()
         {
+            Console.Clear();
             Console.WriteLine("Insira oque será adicionado:");
             Console.WriteLine("1 - Cliente Normal: ");
             Console.WriteLine("2 - Cliente Socio: ");
@@ -112,7 +116,7 @@ namespace TrabalhoEntra21LucasIleck
                     int qtdFornecidaMes = int.Parse(Console.In.ReadLine());
 
                     Fornecedor fornecedor = new Fornecedor(nomeFornecedor, cnpjFornecedor, tipoProduto, qtdFornecidaMes);
-                    FornecedorsList .Add(fornecedor);
+                    FornecedorsList.Add(fornecedor);
                     break;
                 default:
                     break;
@@ -121,65 +125,107 @@ namespace TrabalhoEntra21LucasIleck
         }
         public static void Remover()
         {
-            Console.WriteLine("Insira oque será removido:");
-            Console.WriteLine("1 - Cliente Normal: ");
-            Console.WriteLine("2 - Cliente Socio: ");
-            Console.WriteLine("3 - Funcionario: ");
-            Console.WriteLine("4 - Fornecedor: ");
-            int escolherOpcaoRemove = int.Parse(Console.In.ReadLine());
-            string cpfVerificar;
-            switch (escolherOpcaoRemove)
+            bool menuRemover = true;
+            while (menuRemover)
             {
-                
-                case 1:
-                    Console.Clear();
-                    Console.Write("Insira o CPF do Cliente Normal: ");
-                    cpfVerificar = Console.In.ReadLine();
-                    for (int i = 0; i < ClienteNormalsList.Count; i++)
-                    {
-                        if (ClienteNormalsList[i].CPF.CompareTo(cpfVerificar) == 0)
+                Console.Clear();
+                Console.WriteLine("Insira oque será removido:");
+                Console.WriteLine("1 - Cliente Normal: ");
+                Console.WriteLine("2 - Cliente Socio: ");
+                Console.WriteLine("3 - Funcionario: ");
+                Console.WriteLine("4 - Fornecedor: ");
+                Console.WriteLine("5 - Voltar:");
+                int escolherOpcaoRemove = int.Parse(Console.In.ReadLine());
+                string cpfVerificar;
+                switch (escolherOpcaoRemove)
+                {
+
+                    case 1:
+                        Console.Clear();
+                        foreach (var item in ClienteNormalsList)
                         {
-                            ClienteNormalsList.Remove(ClienteNormalsList[i]);
+                            item.MostrarDados();
                         }
-                    }
-                    break;
-                case 2:
-                    Console.Clear();
-                    Console.Write("Insira o CPF do Cliente Socio: ");
-                    cpfVerificar = Console.In.ReadLine();
-                    for (int i = 0; i < ClienteSociosList.Count; i++)
-                    {
-                        if (ClienteSociosList[i].CPF.CompareTo(cpfVerificar) == 0)
+                        Console.WriteLine();
+                        Console.Write("Insira o CPF do Cliente Normal: ");
+                        cpfVerificar = Console.In.ReadLine();
+                        for (int i = 0; i < ClienteNormalsList.Count; i++)
                         {
-                            ClienteSociosList.Remove(ClienteSociosList[i]); 
+                            if (ClienteNormalsList[i].CPF.CompareTo(cpfVerificar) == 0)
+                            {
+                                ClienteNormalsList[i].MostrarDados();
+                                Console.WriteLine("Removido com sucesso!!");
+                                ClienteNormalsList.Remove(ClienteNormalsList[i]);
+                                Console.ReadLine();
+                            }
                         }
-                    }
-                    break;
-                case 3:
-                    Console.Clear();
-                    Console.Write("Insira o CPF do Funcionario: ");
-                    cpfVerificar = Console.In.ReadLine();
-                    for (int i = 0; i < FuncionariosList.Count; i++)
-                    {
-                        if (FuncionariosList[i].CPF.CompareTo(cpfVerificar) == 0)
+                        break;
+                    case 2:
+                        Console.Clear();
+                        foreach (var item in ClienteSociosList)
                         {
-                            FuncionariosList.Remove(FuncionariosList[i]);
+                            item.MostrarDados();
                         }
-                    }
-                    break;
-                case 4:
-                    Console.Clear();
-                    Console.WriteLine("Insira o Cnpj do Fornecedor: ");
-                    cpfVerificar = Console.In.ReadLine();
-                    for (int i = 0; i < FornecedorsList.Count; i++)
-                    {
-                        if (FornecedorsList[i].Cnpj.CompareTo(cpfVerificar) == 0)
+                        Console.WriteLine();
+                        Console.Write("Insira o CPF do Cliente Socio: ");
+                        cpfVerificar = Console.In.ReadLine();
+                        for (int i = 0; i < ClienteSociosList.Count; i++)
                         {
-                            FornecedorsList.Remove(FornecedorsList[i]);
+                            if (ClienteSociosList[i].CPF.CompareTo(cpfVerificar) == 0)
+                            {
+                                ClienteSociosList[i].MostrarDados();
+                                Console.WriteLine("Removido com sucesso!!");
+                                ClienteSociosList.Remove(ClienteSociosList[i]);
+                                Console.In.ReadLine();
+                            }
                         }
-                    }
-                    break;
+                        break;
+                    case 3:
+                        Console.Clear();
+                        foreach (var item in FuncionariosList)
+                        {
+                            item.MostrarDados();
+                        }
+                        Console.WriteLine();
+                        Console.Write("Insira o CPF do Funcionario: ");
+                        cpfVerificar = Console.In.ReadLine();
+                        for (int i = 0; i < FuncionariosList.Count; i++)
+                        {
+                            if (FuncionariosList[i].CPF.CompareTo(cpfVerificar) == 0)
+                            {
+                                FuncionariosList[i].MostrarDados();
+                                Console.WriteLine("Removido com sucesso!!");
+                                FuncionariosList.Remove(FuncionariosList[i]);
+                                Console.In.ReadLine();
+                            }
+                        }
+                        break;
+                    case 4:
+                        Console.Clear();
+                        foreach (var item in FornecedorsList)
+                        {
+                            item.MostrarDados();
+                        }
+                        Console.WriteLine();
+                        Console.WriteLine("Insira o Cnpj do Fornecedor: ");
+                        cpfVerificar = Console.In.ReadLine();
+                        for (int i = 0; i < FornecedorsList.Count; i++)
+                        {
+                            if (FornecedorsList[i].Cnpj.CompareTo(cpfVerificar) == 0)
+                            {
+                                FornecedorsList[i].MostrarDados();
+                                Console.WriteLine("Removido com sucesso");
+                                FornecedorsList.Remove(FornecedorsList[i]);
+                                Console.In.ReadLine();
+                            }
+                        }
+                        break;
+                    case 5:
+                        menuRemover = false;
+                        break;
+                }
             }
+
         }
         public static void Comprar()
         {
@@ -189,54 +235,59 @@ namespace TrabalhoEntra21LucasIleck
             Console.WriteLine("1-Cliente Normal");
             Console.WriteLine("2-Cliente Socio");
             int escolherTipo = int.Parse(Console.In.ReadLine());
+            string cpfCliente;
             switch (escolherTipo)
             {
+
                 case 1:
                     Console.Clear();
-                    Console.WriteLine("Lista de Cliente Normal");
+                    Console.WriteLine("Lista de Cliente Normal:");
                     Console.WriteLine();
                     foreach (var item in ClienteNormalsList)
                     {
-                        Console.WriteLine(item);
+                        item.MostrarDados();
                     }
-                    Console.WriteLine("Insira o CPF do Cliente que esta comprando:");
-                    string cpfDoClienteNormal = Console.In.ReadLine();
+                    Console.WriteLine("Insira o CPF do Cliente que eesta comprando:");
+                    cpfCliente = Console.In.ReadLine();
                     foreach (var item in ClienteNormalsList)
                     {
-                        if (item.CPF.CompareTo(cpfDoClienteNormal) == 0)
+                        if (cpfCliente == item.CPF)
                         {
-                            Console.Clear();
-                            Console.WriteLine(item);
+                            item.MostrarDados();
                             Console.WriteLine();
-                            Console.WriteLine("Insira o valor da compra:");
-                            double valorDaCompra = double.Parse(Console.In.ReadLine());
-                            item.SetSaldo(item.GetSaldo() - valorDaCompra);
-                            Console.WriteLine(item.GetSaldo());
+                            Console.WriteLine("Insira o valor que o Cliente está comprando: ");
+                            double valorGasto = double.Parse(Console.In.ReadLine());
+                            item.SetSaldo(item.GetSaldo() + valorGasto);
+                            Console.WriteLine();
+                            item.MostrarDados();
+                            Console.ReadLine();
                         }
                     }
                     break;
                 case 2:
                     Console.Clear();
-                    Console.WriteLine("Lista de Cliente Socio");
+                    Console.WriteLine("Lista de Cliente Socio:");
                     Console.WriteLine();
                     foreach (var item in ClienteSociosList)
                     {
-                        Console.WriteLine(item );
+                        item.MostrarDados();
                     }
-                    Console.WriteLine("Insira o CPF do Cliente que esta comprando");
-                    string cpfDoClienteSocio = Console.In.ReadLine();
+                    Console.WriteLine("Insira o CPF do Cliente que eesta comprando:");
+                    cpfCliente = Console.In.ReadLine();
                     foreach (var item in ClienteSociosList)
                     {
-                        if (item.CPF.CompareTo(cpfDoClienteSocio) == 0)
+                        if (cpfCliente == item.CPF)
                         {
-                            Console.Clear();
-                            Console.WriteLine(item);
+                            item.MostrarDados();
                             Console.WriteLine();
-                            Console.WriteLine("Insira o valor da compra: ");
-                            double valorDaCompra = double.Parse(Console.In.ReadLine());
-                            valorDaCompra = valorDaCompra - (valorDaCompra * 0.20);
-                            item.SetSaldo(item.GetSaldo() - valorDaCompra);
-                            Console.WriteLine(item.GetSaldo());
+                            Console.WriteLine("Insira o valor que o Cliente está comprando: ");
+                            double valorGasto = double.Parse(Console.In.ReadLine());
+                            valorGasto = valorGasto - (valorGasto * 0.20);
+                            Console.WriteLine("Desconto aplicado: {0}", valorGasto);
+                            item.SetSaldo(item.GetSaldo() + valorGasto);
+                            Console.WriteLine();
+                            item.MostrarDados();
+                            Console.ReadLine();
                         }
                     }
                     break;
@@ -244,23 +295,39 @@ namespace TrabalhoEntra21LucasIleck
         }
         public static void BaterCartao()
         {
-            Console.WriteLine("Bater Cartão ponto: ");
-            Console.WriteLine();
             foreach (var item in FuncionariosList)
             {
-                Console.WriteLine(item);
+                item.MostrarDados();
             }
-            Console.WriteLine("Insira o CPF do Funcionario que esta batendo o cartão: ");
-            string cpfFuncionario = Console.In.ReadLine();
+            Console.WriteLine();
+            Console.WriteLine("Insira o CPF do funcionario está batendo o cartão:");
+            string cpfEscolher = Console.In.ReadLine();
             foreach (var item in FuncionariosList)
             {
-                if (item.CPF.CompareTo(cpfFuncionario) == 0)
+                if (cpfEscolher == item.CPF)
                 {
                     Console.Clear();
-                    Console.WriteLine(item);
-                    Console.WriteLine();
-                    Console.WriteLine("O cliente está batendo o cartão do dia ou de 30 dias?");
-
+                    Console.WriteLine("1-Cartão do Dia");
+                    Console.WriteLine("2-Cartão do mês");
+                    int esc = int.Parse(Console.In.ReadLine());
+                    switch (esc)
+                    {
+                        case 1:
+                            Console.Clear();
+                            Console.WriteLine("Insira o horario de entrada:");
+                            int entrada = int.Parse(Console.In.ReadLine());
+                            Console.WriteLine("Insira  horario de Saida:");
+                            int saida = int.Parse(Console.In.ReadLine());
+                            item.BaterPonto(entrada, saida);
+                            Console.In.ReadLine();
+                            break;
+                        case 2:
+                            Console.Clear();
+                            item.BaterPonto30Vezes();
+                            item.MostrarDados();
+                            Console.In.ReadLine();
+                            break;
+                    }
                 }
             }
         }
@@ -272,9 +339,17 @@ namespace TrabalhoEntra21LucasIleck
         {
 
         }
-        public static void Sair()
+        public static bool Sair(int escolha)
         {
-            
+            if (escolha == 7)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
         }
     }
 }

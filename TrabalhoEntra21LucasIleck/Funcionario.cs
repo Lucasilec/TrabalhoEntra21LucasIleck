@@ -48,5 +48,26 @@ namespace TrabalhoEntra21LucasIleck
                 SetSaldo(horario1 * SalarioHours);
             }
         }
+        public void BaterPonto30Vezes()
+        {
+            Random ran = new Random();
+            for (int i = 0; i < 30; i++)
+            {
+                int hrEntrada = ran.Next(7, 21);
+                int hrSaida = ran.Next(7, 21);
+                int horarioDeTrabalho = (hrEntrada - hrSaida);
+                if (hrEntrada > hrSaida)
+                {
+                    int horario1 = hrEntrada - 24;
+                    horario1 = horario1 + hrSaida;
+                    SetSaldo(horario1 * SalarioHours);
+                }
+                else
+                {
+                    int horario1 = hrSaida - hrEntrada;
+                    SetSaldo(horario1 * SalarioHours);
+                }
+            }
+        }
     }
 }

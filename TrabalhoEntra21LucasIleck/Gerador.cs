@@ -43,6 +43,7 @@ namespace TrabalhoEntra21LucasIleck
             }
             return cpf;
         }
+       
         // Escolhe um nome de uma lista (sem sobrenome)
         public static string NomePessoa()
         {
