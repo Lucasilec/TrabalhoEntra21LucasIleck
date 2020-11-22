@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace TrabalhoEntra21LucasIleck
 {
@@ -13,9 +14,10 @@ namespace TrabalhoEntra21LucasIleck
             Cargo = cargo;
             SalarioHours = salaryHours;
             
-        }
+        }      
         public string Cargo { get; private set; }
         public double SalarioHours { get; private set; }
+        public List<HistoricoDeTrabalho> HistoricoDeTrabalhos { get; set; } = new List<HistoricoDeTrabalho>();
         public override void DefineDados(string nome, string cpf, int idade, double saldo)
         {
             base.DefineDados(nome, cpf, idade, saldo);
@@ -24,9 +26,17 @@ namespace TrabalhoEntra21LucasIleck
         {
             base.MostrarDados();
         }
+        public void MostrarHistorico()
+        {
+            foreach (var item in HistoricoDeTrabalhos)
+            {
+                Console.WriteLine($"Hora Trabalhada: {item.HorasTrabalhadaNoDia} | Ganho do Dia: {item.SalarioGanhoDia.ToString("C", CultureInfo.CurrentCulture)}");
+            }
+        }
         public void MostraCargoSalario()
         {
-            Console.WriteLine($"Cargo do Funcionario: {Cargo} .Salario: {SalarioHours}");        
+
+            Console.WriteLine($"Cargo do Funcionario: {Cargo} .Salario: {SalarioHours.ToString("C", CultureInfo.CurrentCulture)}");        
         }
         public void DefineCargoSalario(string cargo, double salario)
         {
@@ -35,38 +45,35 @@ namespace TrabalhoEntra21LucasIleck
         }
         public void BaterPonto(int hrEntrada, int hrSaida)
         {
-            int horarioDeTrabalho = (hrEntrada - hrSaida);
+            double valorGanho = 0;
+            int horasTrabalhada;
             if (hrEntrada > hrSaida)
             {
-                int horario1 = hrEntrada - 24;
-                horario1 = horario1 + hrSaida;
-                SetSaldo(horario1* SalarioHours);
+                horasTrabalhada = 24 - hrEntrada;
+                horasTrabalhada = horasTrabalhada + hrSaida;
+                valorGanho = horasTrabalhada * SalarioHours;
+                SetSaldo(GetSaldo() + valorGanho);
             }
             else
             {
-                int horario1 = hrSaida - hrEntrada;
-                SetSaldo(horario1 * SalarioHours);
+                horasTrabalhada = hrSaida - hrEntrada;
+                valorGanho = horasTrabalhada * SalarioHours;
+                SetSaldo(GetSaldo() + valorGanho);
             }
+            HistoricoDeTrabalho historico = new HistoricoDeTrabalho(horasTrabalhada, valorGanho);
+            HistoricoDeTrabalhos.Add(historico);
+
         }
         public void BaterPonto30Vezes()
         {
             Random ran = new Random();
             for (int i = 0; i < 30; i++)
             {
+
                 int hrEntrada = ran.Next(7, 21);
                 int hrSaida = ran.Next(7, 21);
-                int horarioDeTrabalho = (hrEntrada - hrSaida);
-                if (hrEntrada > hrSaida)
-                {
-                    int horario1 = hrEntrada - 24;
-                    horario1 = horario1 + hrSaida;
-                    SetSaldo(horario1 * SalarioHours);
-                }
-                else
-                {
-                    int horario1 = hrSaida - hrEntrada;
-                    SetSaldo(horario1 * SalarioHours);
-                }
+
+                BaterPonto(hrEntrada, hrSaida);
             }
         }
     }

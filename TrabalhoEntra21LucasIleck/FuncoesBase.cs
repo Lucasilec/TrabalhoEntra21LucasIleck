@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace TrabalhoEntra21LucasIleck
 {
-    class FuncoesBase
+    static class FuncoesBase
     {
-        public double GerarAcoes()
+        //Funções variadas que quebram um galho
+        static public double GerarAcoes()
         {
             Random ran = new Random();
             double acoes = ran.Next(1, 496);
             acoes = acoes / 100;
             return acoes;
         }
-        public string GeradorCargo()
+        public static string GeradorCargo()
         {
             Random ran = new Random();
             int index = ran.Next(1, 6);
@@ -40,7 +41,7 @@ namespace TrabalhoEntra21LucasIleck
             }
             return cargoFuncionario;
         }
-        public double GerarSalario(string cargo)
+        public static double GerarSalario(string cargo)
         {
             double salary = 0;
             Random ran = new Random();
@@ -71,7 +72,7 @@ namespace TrabalhoEntra21LucasIleck
             }
             return salary;
         }
-        public static string Cnpj()
+        public static string GerarCnpj()
         {
             Random ran = new Random();
             string cnpj = "";
@@ -96,26 +97,163 @@ namespace TrabalhoEntra21LucasIleck
             }
             return cnpj;
         }
-        public void IniciarAddClienteNormal()
+        public static void IniciarAddClienteNormal()
         {
-            ClienteNormal clienteNormal = new ClienteNormal(Gerador.NomePessoa(), Gerador.Cpf(), Gerador.Idade(), Gerador.Saldo());
+            string cpfTemp = "";
+            bool validar = true;
+            do
+            {
+                cpfTemp = Gerador.Cpf();
+                validar = VerificarCPF(cpfTemp, FuncoesMenu.ClienteNormalsList, FuncoesMenu.ClienteSociosList, FuncoesMenu.FuncionariosList);            
+            } while (validar == false);
+
+            ClienteNormal clienteNormal = new ClienteNormal(Gerador.NomePessoa(), cpfTemp, Gerador.Idade(), Gerador.Saldo());
             FuncoesMenu.ClienteNormalsList.Add(clienteNormal);
+
         }
-        public void IniciarAddClienteSocio()
+        public static void IniciarAddClienteSocio()
         {
-            ClienteSocio clienteSocio = new ClienteSocio(GerarAcoes(), Gerador.NomePessoa(), Gerador.Cpf(), Gerador.Idade(), Gerador.Saldo());
+            string cpfTemp = "";
+            bool validar = true;
+            do
+            {
+                cpfTemp = Gerador.Cpf();
+                validar = VerificarCPF(cpfTemp, FuncoesMenu.ClienteNormalsList, FuncoesMenu.ClienteSociosList, FuncoesMenu.FuncionariosList);
+            } while (validar == false);
+            ClienteSocio clienteSocio = new ClienteSocio(GerarAcoes(), Gerador.NomePessoa(), cpfTemp, Gerador.Idade(), Gerador.Saldo());
             FuncoesMenu.ClienteSociosList.Add(clienteSocio);
         }
-        public void IniciarAddFuncionario()
+        public static void IniciarAddFuncionario()
         {
+            string cpfTemp = "";
+            bool validar = true;
+            do
+            {
+                cpfTemp = Gerador.Cpf();
+                validar = VerificarCPF(cpfTemp, FuncoesMenu.ClienteNormalsList, FuncoesMenu.ClienteSociosList, FuncoesMenu.FuncionariosList);
+            } while (validar == false);
             string cargo = GeradorCargo();
 
-            Funcionario funcionario = new Funcionario(cargo, GerarSalario(cargo), Gerador.NomePessoa(), Gerador.Cpf(), Gerador.Idade(), Gerador.Saldo());
+            Funcionario funcionario = new Funcionario(cargo, GerarSalario(cargo), Gerador.NomePessoa(), cpfTemp, Gerador.Idade(), Gerador.Saldo());
             FuncoesMenu.FuncionariosList.Add(funcionario);
         }
-        public void IniciarAddFornecedor()
+        public static void IniciarAddFornecedor()
         {
-            //Fornecedor fornecedor = new Fornecedor(Gerador.NomeEmpresa(), Cnpj(), )
+            string cnpjTemp = "";
+            bool validar = true;
+            do
+            {
+                cnpjTemp = GerarCnpj();
+                validar = VerificarCNPJ(cnpjTemp, FuncoesMenu.FornecedorsList);
+            } while (validar == false);
+            Fornecedor fornecedor = new Fornecedor(Gerador.NomeEmpresa(), cnpjTemp , TipoProduto(), QuantidadeProdutoFornecido());
+        }
+        public static int TipoProduto()
+        {
+            Random ran = new Random();
+            int tipoProduto = ran.Next(1, 7);
+            return tipoProduto;
+        }
+        public static int QuantidadeProdutoFornecido()
+        {
+            Random ran = new Random();
+            int qtdProduto = ran.Next(1, 200);
+            return qtdProduto;
+        }
+        public static double ValorProduto(int tipoProduto)
+        {
+            double valorProduto = 0;
+            switch (tipoProduto)
+            {
+                case 1:
+                    valorProduto = 5.45;
+                    break;
+                case 2:
+                    valorProduto = 6.78;
+                    break;
+                case 3:
+                    valorProduto = 1.43;
+                    break;
+                case 4:
+                    valorProduto = 2.68;
+                    break;
+                case 5:
+                    valorProduto = 3.78;
+                    break;
+                case 6:
+                    valorProduto = 2.96;
+                    break;
+            }
+            return valorProduto;
+        }
+        public static bool VerificarCPF(string cpfVerificar, List<ClienteNormal> clienteNormals, List<ClienteSocio> clienteSocios, List<Funcionario> funcionarios)
+        {
+            bool CpfRepetido = true;
+            if (CpfRepetido == true)
+            {
+                foreach (var item in clienteNormals)
+                {
+                    if (item.CPF == cpfVerificar)
+                    {
+                        CpfRepetido = false;
+                        break;
+                    }
+                    else
+                    {
+                        CpfRepetido = true;
+                    }
+                }
+            }
+            else if (CpfRepetido == true)
+            {
+                foreach (var item in clienteSocios)
+                {
+                    if (item.CPF == cpfVerificar)
+                    {
+                        CpfRepetido = false;
+                        break;
+                    }
+                    else
+                    {
+                        CpfRepetido = true;
+                    }
+                }
+            }
+            else if (CpfRepetido == true)
+            {
+
+                foreach (var item in funcionarios)
+                {
+                    if (item.CPF == cpfVerificar)
+                    {
+                        CpfRepetido = false;
+                        break;
+                    }
+                    else
+                    {
+                        CpfRepetido = true;
+                    }
+                }
+            }
+            return CpfRepetido;
+           
+        }
+        public static bool VerificarCNPJ(string cnpjVerificar, List<Fornecedor> fornecedor)
+        {
+            bool cnpjRepetido = true;
+            foreach (var item in fornecedor)
+            {
+                if (item.Cnpj == cnpjVerificar)
+                {
+                    cnpjRepetido = false;
+                    break;
+                }
+                else
+                {
+                    cnpjRepetido = true;
+                }
+            }
+            return cnpjRepetido;
         }
     }
 }

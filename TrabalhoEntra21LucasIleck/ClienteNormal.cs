@@ -38,7 +38,8 @@ namespace TrabalhoEntra21LucasIleck
 
         public virtual void MostrarDados()
         { 
-            Console.WriteLine($"Nome: {Nome} .CPF: {CPF} .Idade: {Idade} .Saldo: {GetSaldo()}");
+            Console.WriteLine($"Nome: {Nome} | CPF: {CPF} | Idade: {Idade} | Saldo: {GetSaldo()}");
+            Console.WriteLine("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
         }
         public virtual void DefineDados(string nome, string cpf, int idade, double saldo)
         {

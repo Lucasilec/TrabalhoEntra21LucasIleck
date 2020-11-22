@@ -44,84 +44,97 @@ namespace TrabalhoEntra21LucasIleck
         }
         public static void Adicionar()
         {
-            Console.Clear();
-            Console.WriteLine("Insira oque será adicionado:");
-            Console.WriteLine("1 - Cliente Normal: ");
-            Console.WriteLine("2 - Cliente Socio: ");
-            Console.WriteLine("3 - Funcionario: ");
-            Console.WriteLine("4 - Fornecedor: ");
-            int escolherOpcaoADD = int.Parse(Console.In.ReadLine());
-            switch (escolherOpcaoADD)
+            bool MenuAdicionar = true;
+            while (MenuAdicionar)
             {
-                case 1:
-                    Console.Clear();
-                    Console.WriteLine("Vamos inserir o Cliente Normal: ");
-                    Console.WriteLine("Entre com os valores: ");
+                Console.Clear();
+                Console.WriteLine("Insira oque será adicionado:");
+                Console.WriteLine("1 - Cliente Normal: ");
+                Console.WriteLine("2 - Cliente Socio: ");
+                Console.WriteLine("3 - Funcionario: ");
+                Console.WriteLine("4 - Fornecedor: ");
+                Console.WriteLine("5 - Voltar:");
+                int escolherOpcaoADD = int.Parse(Console.In.ReadLine());
+                switch (escolherOpcaoADD)
+                {
+                    case 1:
+                        Console.Clear();
+                        Console.WriteLine("Vamos inserir o Cliente Normal: ");
+                        Console.WriteLine("Entre com os valores: ");
 
-                    Console.WriteLine("Entre com o nome do Cliente Normal: ");
-                    string nomeClienteNormal = Console.In.ReadLine();
-                    Console.WriteLine("Insira o CPF do cliente Normal: ");
-                    string cpfClienteNormal = Console.In.ReadLine();
-                    Console.WriteLine("Insira a idade do Cliente Normal: ");
-                    int idadeClienteNormal = int.Parse(Console.In.ReadLine());
+                        Console.WriteLine("Entre com o nome do Cliente Normal: ");
+                        string nomeClienteNormal = Console.In.ReadLine();
+                        Console.WriteLine("Insira o CPF do cliente Normal: ");
+                        string cpfClienteNormal = Console.In.ReadLine();
+                        Console.WriteLine("Insira a idade do Cliente Normal: ");
+                        int idadeClienteNormal = int.Parse(Console.In.ReadLine());
 
-                    ClienteNormal clienteNormal = new ClienteNormal(nomeClienteNormal, cpfClienteNormal, idadeClienteNormal, Gerador.Saldo());
-                    ClienteNormalsList.Add(clienteNormal);
-                    break;
-                case 2:
-                    Console.Clear();
-                    Console.WriteLine("Vamos inserir o Cliente Socio: ");
-                    Console.WriteLine();
-                    Console.WriteLine("Insira o nome do Cliente Socio: ");
-                    string nomeClienteSocio = Console.In.ReadLine();
-                    Console.WriteLine("Insira o CPF do cliente Sicio: ");
-                    string cpfClienteSocio = Console.In.ReadLine();
-                    Console.WriteLine("Insira a Idade do Cliente Socio: ");
-                    int idadeClienteSocio = int.Parse(Console.In.ReadLine());
+                        ClienteNormal clienteNormal = new ClienteNormal(nomeClienteNormal, cpfClienteNormal, idadeClienteNormal, Gerador.Saldo());
+                        ClienteNormalsList.Add(clienteNormal);
+                        break;
+                    case 2:
+                        if (ClienteSociosList.Count <= 10)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Vamos inserir o Cliente Socio: ");
+                            Console.WriteLine();
+                            Console.WriteLine("Insira o nome do Cliente Socio: ");
+                            string nomeClienteSocio = Console.In.ReadLine();
+                            Console.WriteLine("Insira o CPF do cliente Sicio: ");
+                            string cpfClienteSocio = Console.In.ReadLine();
+                            Console.WriteLine("Insira a Idade do Cliente Socio: ");
+                            int idadeClienteSocio = int.Parse(Console.In.ReadLine());
 
-                    ClienteSocio clienteSocio = new ClienteSocio(0, nomeClienteSocio, cpfClienteSocio, idadeClienteSocio, Gerador.Saldo());
-                    ClienteSociosList.Add(clienteSocio);
-                    break;
-                case 3:
-                    Console.Clear();
-                    Console.WriteLine("Vamos inserir o Funcionario: ");
-                    Console.WriteLine();
-                    Console.WriteLine("Insira o nome do funcionario: ");
-                    string nomeFuncionario = Console.In.ReadLine();
-                    Console.WriteLine("Insira o CPF do funcionario: ");
-                    string cpfFuncionario = Console.In.ReadLine();
-                    Console.WriteLine("Insira a idade do funcionario: ");
-                    int idadeFuncionario = int.Parse(Console.In.ReadLine());
-                    Console.WriteLine("Insira o Saldo do Funcionario: ");
-                    double saldoFuncionario = double.Parse(Console.In.ReadLine());
-                    Console.WriteLine("Insira o cargo do funcionario: ");
-                    string cargoFuncionario = Console.In.ReadLine();
-                    Console.WriteLine("Insira o saldo do funcionario: ");
-                    double salaryHoursFuncionario = double.Parse(Console.In.ReadLine());
+                            ClienteSocio clienteSocio = new ClienteSocio(FuncoesBase.GerarAcoes(), nomeClienteSocio, cpfClienteSocio, idadeClienteSocio, Gerador.Saldo());
+                            ClienteSociosList.Add(clienteSocio);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Lista lotada, só pode conter 10 Cliente Socio");
+                        }
 
-                    Funcionario funcionario = new Funcionario(cargoFuncionario, salaryHoursFuncionario, nomeFuncionario, cpfFuncionario, idadeFuncionario, saldoFuncionario);
-                    FuncionariosList.Add(funcionario);
-                    break;
-                case 4:
-                    Console.Clear();
-                    Console.WriteLine("Vamos Inserir o Fornecedor");
-                    Console.WriteLine();
-                    Console.WriteLine("Insira o nome do Fornecedor: ");
-                    string nomeFornecedor = Console.In.ReadLine();
-                    Console.WriteLine("Insira o Cnpj do Fornecedor: ");
-                    string cnpjFornecedor = Console.In.ReadLine();
-                    Console.WriteLine("Insira o Tipo de Produto: ");
-                    int tipoProduto = int.Parse(Console.In.ReadLine());
-                    Console.WriteLine("Insira a quantidade fornecida ao Mês: ");
-                    int qtdFornecidaMes = int.Parse(Console.In.ReadLine());
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Console.WriteLine("Vamos inserir o Funcionario: ");
+                        Console.WriteLine();
+                        Console.WriteLine("Insira o nome do funcionario: ");
+                        string nomeFuncionario = Console.In.ReadLine();
+                        Console.WriteLine("Insira o CPF do funcionario: ");
+                        string cpfFuncionario = Console.In.ReadLine();
+                        Console.WriteLine("Insira a idade do funcionario: ");
+                        int idadeFuncionario = int.Parse(Console.In.ReadLine());
+                        Console.WriteLine("Insira o Saldo do Funcionario: ");
+                        double saldoFuncionario = double.Parse(Console.In.ReadLine());
+                        Console.WriteLine("Insira o cargo do funcionario: ");
+                        string cargoFuncionario = Console.In.ReadLine();
+                        Console.WriteLine("Insira o salario hora, do funcionario: ");
+                        double salaryHoursFuncionario = double.Parse(Console.In.ReadLine());
 
-                    Fornecedor fornecedor = new Fornecedor(nomeFornecedor, cnpjFornecedor, tipoProduto, qtdFornecidaMes);
-                    FornecedorsList.Add(fornecedor);
-                    break;
-                default:
-                    break;
+                        Funcionario funcionario = new Funcionario(cargoFuncionario, salaryHoursFuncionario, nomeFuncionario, cpfFuncionario, idadeFuncionario, saldoFuncionario);
+                        FuncionariosList.Add(funcionario);
+                        break;
+                    case 4:
+                        Console.Clear();
+                        Console.WriteLine("Vamos Inserir o Fornecedor");
+                        Console.WriteLine();
+                        Console.WriteLine("Insira o nome do Fornecedor: ");
+                        string nomeFornecedor = Console.In.ReadLine();
+                        Console.WriteLine("Insira o Cnpj do Fornecedor: ");
+                        string cnpjFornecedor = Console.In.ReadLine();
+                        Console.WriteLine("Insira o Tipo de Produto: ");
+                        int tipoProduto = int.Parse(Console.In.ReadLine());
+                        Console.WriteLine("Insira a quantidade fornecida ao Mês: ");
+                        int qtdFornecidaMes = int.Parse(Console.In.ReadLine());
+
+                        Fornecedor fornecedor = new Fornecedor(nomeFornecedor, cnpjFornecedor, tipoProduto, qtdFornecidaMes);
+                        FornecedorsList.Add(fornecedor);
+                        break;
+                    case 5:
+                        MenuAdicionar = false;
+                        break;
+                }
             }
-
         }
         public static void Remover()
         {
@@ -229,107 +242,170 @@ namespace TrabalhoEntra21LucasIleck
         }
         public static void Comprar()
         {
-            Console.Clear();
-            Console.WriteLine("Insira o Tipo de Cliente");
-            Console.WriteLine();
-            Console.WriteLine("1-Cliente Normal");
-            Console.WriteLine("2-Cliente Socio");
-            int escolherTipo = int.Parse(Console.In.ReadLine());
-            string cpfCliente;
-            switch (escolherTipo)
+            bool MenuComprar = true;
+            while (MenuComprar)
             {
+                Console.Clear();
+                Console.WriteLine("Insira o Tipo de Cliente");
+                Console.WriteLine();
+                Console.WriteLine("1 - Cliente Normal:");
+                Console.WriteLine("2 - Cliente Socio:");
+                Console.WriteLine("3 - Voltar:");
+                int escolherTipo = int.Parse(Console.In.ReadLine());
+                string cpfCliente;
+                switch (escolherTipo)
+                {
 
-                case 1:
-                    Console.Clear();
-                    Console.WriteLine("Lista de Cliente Normal:");
-                    Console.WriteLine();
-                    foreach (var item in ClienteNormalsList)
-                    {
-                        item.MostrarDados();
-                    }
-                    Console.WriteLine("Insira o CPF do Cliente que eesta comprando:");
-                    cpfCliente = Console.In.ReadLine();
-                    foreach (var item in ClienteNormalsList)
-                    {
-                        if (cpfCliente == item.CPF)
+                    case 1:
+                        Console.Clear();
+                        Console.WriteLine("Lista de Cliente Normal:");
+                        Console.WriteLine();
+                        foreach (var item in ClienteNormalsList)
                         {
                             item.MostrarDados();
-                            Console.WriteLine();
-                            Console.WriteLine("Insira o valor que o Cliente está comprando: ");
-                            double valorGasto = double.Parse(Console.In.ReadLine());
-                            item.SetSaldo(item.GetSaldo() + valorGasto);
-                            Console.WriteLine();
-                            item.MostrarDados();
-                            Console.ReadLine();
                         }
-                    }
-                    break;
-                case 2:
-                    Console.Clear();
-                    Console.WriteLine("Lista de Cliente Socio:");
-                    Console.WriteLine();
-                    foreach (var item in ClienteSociosList)
-                    {
-                        item.MostrarDados();
-                    }
-                    Console.WriteLine("Insira o CPF do Cliente que eesta comprando:");
-                    cpfCliente = Console.In.ReadLine();
-                    foreach (var item in ClienteSociosList)
-                    {
-                        if (cpfCliente == item.CPF)
+                        Console.WriteLine("Insira o CPF do Cliente que eesta comprando:");
+                        cpfCliente = Console.In.ReadLine();
+                        foreach (var item in ClienteNormalsList)
+                        {
+                            if (cpfCliente == item.CPF)
+                            {
+                                item.MostrarDados();
+                                Console.WriteLine();
+                                Console.WriteLine("Insira o valor que o Cliente está comprando: ");
+                                double valorGasto = double.Parse(Console.In.ReadLine());
+                                item.SetSaldo(item.GetSaldo() + valorGasto);
+                                Console.WriteLine();
+                                item.MostrarDados();
+                                Console.ReadLine();
+                            }
+                        }
+                        break;
+                    case 2:
+                        Console.Clear();
+                        Console.WriteLine("Lista de Cliente Socio:");
+                        Console.WriteLine();
+                        foreach (var item in ClienteSociosList)
                         {
                             item.MostrarDados();
-                            Console.WriteLine();
-                            Console.WriteLine("Insira o valor que o Cliente está comprando: ");
-                            double valorGasto = double.Parse(Console.In.ReadLine());
-                            valorGasto = valorGasto - (valorGasto * 0.20);
-                            Console.WriteLine("Desconto aplicado: {0}", valorGasto);
-                            item.SetSaldo(item.GetSaldo() + valorGasto);
-                            Console.WriteLine();
-                            item.MostrarDados();
-                            Console.ReadLine();
                         }
-                    }
-                    break;
+                        Console.WriteLine("Insira o CPF do Cliente que eesta comprando:");
+                        cpfCliente = Console.In.ReadLine();
+                        foreach (var item in ClienteSociosList)
+                        {
+                            if (cpfCliente == item.CPF)
+                            {
+                                item.MostrarDados();
+                                Console.WriteLine();
+                                Console.WriteLine("Insira o valor que o Cliente está comprando: ");
+                                double valorGasto = double.Parse(Console.In.ReadLine());
+                                valorGasto = valorGasto - (valorGasto * 0.20);
+                                Console.WriteLine("Desconto aplicado: {0}", valorGasto);
+                                item.SetSaldo(item.GetSaldo() + valorGasto);
+                                Console.WriteLine();
+                                item.MostrarDados();
+                                Console.ReadLine();
+                            }
+                        }
+                        break;
+                    case 3:
+                        MenuComprar = false;
+                        break;
+                }
             }
+           
         }
         public static void BaterCartao()
         {
-            foreach (var item in FuncionariosList)
+            bool menuBaterCartao = true;
+            while (menuBaterCartao)
             {
-                item.MostrarDados();
-            }
-            Console.WriteLine();
-            Console.WriteLine("Insira o CPF do funcionario está batendo o cartão:");
-            string cpfEscolher = Console.In.ReadLine();
-            foreach (var item in FuncionariosList)
-            {
-                if (cpfEscolher == item.CPF)
+                Console.Clear();
+                Console.WriteLine("Bater Cartão Ponto");
+                Console.WriteLine();
+                foreach (var item in FuncionariosList)
                 {
-                    Console.Clear();
-                    Console.WriteLine("1-Cartão do Dia");
-                    Console.WriteLine("2-Cartão do mês");
-                    int esc = int.Parse(Console.In.ReadLine());
-                    switch (esc)
-                    {
-                        case 1:
-                            Console.Clear();
-                            Console.WriteLine("Insira o horario de entrada:");
-                            int entrada = int.Parse(Console.In.ReadLine());
-                            Console.WriteLine("Insira  horario de Saida:");
-                            int saida = int.Parse(Console.In.ReadLine());
-                            item.BaterPonto(entrada, saida);
-                            Console.In.ReadLine();
-                            break;
-                        case 2:
-                            Console.Clear();
-                            item.BaterPonto30Vezes();
-                            item.MostrarDados();
-                            Console.In.ReadLine();
-                            break;
-                    }
+                    item.MostrarDados();
                 }
-            }
+                Console.WriteLine();
+                Console.WriteLine("1 - Bater Ponto:");
+                Console.WriteLine("2 - Voltar");
+                bool fim = false;
+                int escolha1 = 0;
+                while (!fim)
+                {
+                    try
+                    {
+                        escolha1 = int.Parse(Console.In.ReadLine());
+                        fim = true;
+                    }
+                    catch (System.FormatException)
+                    {
+                        Console.WriteLine("Digite 1 ou 2");
+                        Console.ReadLine();
+                        Console.Clear();
+                    }
+                }              
+                switch (escolha1)
+                {
+                    case 1:
+                        Console.WriteLine();
+                        Console.WriteLine("Digite o CPF");
+                        string cpfEscolher = Console.In.ReadLine();
+                        foreach (var item in FuncionariosList)
+                        {
+                            if (cpfEscolher == item.CPF)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Bater Cartão Ponto");
+                                Console.WriteLine();
+                                item.MostrarDados();
+                                item.MostraCargoSalario();
+                                Console.WriteLine();
+                                Console.WriteLine("1 - Cartão do Dia:");
+                                Console.WriteLine("2 - Cartão do mês:");
+                                Console.WriteLine("3 - Voltar:");
+                                int esc = int.Parse(Console.In.ReadLine());
+                                switch (esc)
+                                {
+                                    case 1:
+                                        Console.Clear();
+                                        Console.WriteLine("Insira o horario de entrada:");
+                                        int entrada = int.Parse(Console.In.ReadLine());
+                                        Console.WriteLine("Insira  horario de Saida:");
+                                        int saida = int.Parse(Console.In.ReadLine());
+                                        item.BaterPonto(entrada, saida);
+                                        item.MostrarDados();
+                                        item.MostraCargoSalario();
+                                        Console.WriteLine();
+                                        item.MostrarHistorico();
+                                        Console.In.ReadLine();
+                                        break;
+                                    case 2:
+                                        Console.Clear();
+                                        item.BaterPonto30Vezes();
+                                        item.MostrarDados();
+                                        item.MostraCargoSalario();
+                                        Console.WriteLine();
+                                        item.MostrarHistorico();
+                                        Console.In.ReadLine();
+                                        break;
+                                    case 3:
+                                        menuBaterCartao = false;
+                                        break;
+                                }
+                            }
+                            if (menuBaterCartao == false)
+                            {
+                                break;                               
+                            }
+                        }
+                        break;
+                    case 2:
+                        menuBaterCartao = false;
+                        break;
+                }
+            }         
         }
         public static void Alterar()
         {

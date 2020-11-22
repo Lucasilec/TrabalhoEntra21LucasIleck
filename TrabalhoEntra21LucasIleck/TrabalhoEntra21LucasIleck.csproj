@@ -65,6 +65,7 @@
     <Compile Include="FuncoesBase.cs" />
     <Compile Include="FuncoesMenu.cs" />
     <Compile Include="Gerador.cs" />
+    <Compile Include="HistoricoDeTrabalho.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
