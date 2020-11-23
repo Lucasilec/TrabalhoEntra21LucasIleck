@@ -9,7 +9,7 @@ namespace TrabalhoEntra21LucasIleck
     class Program
     {
         
-        static void Main(string[] args)
+        static void Main(string[] args)           
         {
             //iniciar Projeto
             for (int i = 0; i < 5; i++)
@@ -24,6 +24,7 @@ namespace TrabalhoEntra21LucasIleck
             {
                 FuncoesBase.IniciarAddFuncionario();
             }
+            //Menu Principal
             do
             {
                 Console.Clear();

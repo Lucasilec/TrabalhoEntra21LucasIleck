@@ -409,7 +409,84 @@ namespace TrabalhoEntra21LucasIleck
         }
         public static void Alterar()
         {
+            bool menuAlterar = true;
+            while (menuAlterar == true)
+            {
+                Console.Clear();
+                Console.WriteLine("Menu Alterar");
+                Console.WriteLine();
+                Console.WriteLine("1 - Cliente Normal: ");
+                Console.WriteLine("2 - Cliente Socio: ");
+                Console.WriteLine("3 - Funcionario: ");
+                Console.WriteLine("4 - Fornecedor: ");
+                Console.WriteLine("5 - Voltar:");
+                int escolhaAlterar = int.Parse(Console.In.ReadLine());
+                switch (escolhaAlterar)
+                {
+                    case 1:
+                        Console.Clear();
+                        MostrarLista(1);
+                        Console.WriteLine();
+                        Console.WriteLine("Digite o CPF:");
+                        string cpfCliente = Console.In.ReadLine();
+                        foreach (var item in ClienteNormalsList)
+                        {
+                            if (item.CPF.CompareTo(cpfCliente) == 0)
+                            {
+                                Console.WriteLine("Digite o Novo nome:");
+                                string nome = Console.In.ReadLine();
+                                Console.WriteLine("Digite o Novo CPF:");
+                                string cpf = Console.In.ReadLine();
+                                Console.WriteLine("Digite a Nova Idade:");
+                                int idade = int.Parse(Console.In.ReadLine());
 
+                                item.DefineDados(nome, cpf, idade, 0);
+                            }
+                        }
+                        break;
+                    case 2:
+                        Console.Clear();
+                        MostrarLista(2);
+                        Console.WriteLine();
+                        Console.WriteLine("Digite o CPF:");
+                        string cpfSocio = Console.In.ReadLine();
+                        foreach (var item in ClienteSociosList)
+                        {
+                            if (item.CPF.CompareTo(cpfSocio) == 0)
+                            {
+                                Console.WriteLine("Digite o Novo nome:");
+                                string nome = Console.In.ReadLine();
+                                Console.WriteLine("Digite o Novo CPF:");
+                                string cpf = Console.In.ReadLine();
+                                Console.WriteLine("Digite a Nova Idade:");
+                                int idade = int.Parse(Console.In.ReadLine());
+
+                                item.DefineDados(nome, cpf, idade, 0);
+                                Console.WriteLine("Digite as novas Ações");
+                                bool indexAcoes;
+                                do
+                                {
+                                    double acoes = double.Parse(Console.In.ReadLine());
+                                    indexAcoes = item.DefineAcoes(acoes);
+                                } while (indexAcoes == false);
+                               
+                            }
+                        }
+                        break;
+                    case 3:
+                        Console.Clear();
+                        MostrarLista(3);
+                        break;
+                    case 4:
+                        Console.Clear();
+                        MostrarLista(4);
+                        break;
+                    case 5:
+                        menuAlterar = false;
+                        break;
+                      
+                }
+            }
         }
         public static void CalcularLucro()
         {
@@ -426,6 +503,59 @@ namespace TrabalhoEntra21LucasIleck
                 return true;
             }
 
+        }
+        /// <summary>
+        /// Escolha o tipo:
+        /// 1 => Cliente Normal
+        /// 2 => Cliente Socio
+        /// 3 => Funcionario
+        /// 4 => Fornecedor
+        /// </summary>
+        /// <param name="index"></param>
+        public static void MostrarLista(int index)
+        {
+            switch (index)
+            {
+                case 1:
+                    Console.WriteLine("Cliente Normal:");
+                    Console.WriteLine();
+                    foreach (var item in ClienteNormalsList)
+                    {
+                        item.MostrarDados();
+                        Console.WriteLine("=============================================================================");
+                    }
+                    break;
+                case 2:
+                    Console.WriteLine("Cliente Socio:");
+                    Console.WriteLine();
+                    foreach (var item in ClienteSociosList)
+                    {
+                        item.MostrarDados();
+                        item.MostraAcoes();
+                        Console.WriteLine("=============================================================================");
+                    }
+                    break;
+                case 3:
+                    Console.WriteLine("Cliente Funcionario:");
+                    Console.WriteLine();
+                    foreach (var item in FuncionariosList)
+                    {
+                        item.MostrarDados();
+                        item.MostraCargoSalario();
+                        Console.WriteLine("=============================================================================");
+                    }
+                    break;
+                case 4:
+                    Console.WriteLine("Cliente Fornecedor:");
+                    Console.WriteLine();
+                    foreach (var item in FornecedorsList)
+                    {
+                        item.MostrarDados();
+                        item.MostraQuantidadeFornecida();
+                        Console.WriteLine("=============================================================================");
+                    }
+                    break;
+            }
         }
     }
 }

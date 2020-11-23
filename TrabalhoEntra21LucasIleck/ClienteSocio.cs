@@ -38,9 +38,20 @@ namespace TrabalhoEntra21LucasIleck
         {
             Console.WriteLine($"Quantidade de ações: {QtdAcoes}");
         }
-        public void DefineAcoes(double acoes)
+        public bool DefineAcoes(double acoes)
         {
-            SetQtdAcoes(acoes);
+            bool limiteAcoes;
+            if (acoes > (495 / 100))
+            {
+                limiteAcoes = false;
+            }
+            else
+            {
+                SetQtdAcoes(acoes);
+                limiteAcoes = true;
+            }
+            return limiteAcoes;
+            
         }
     }
 }

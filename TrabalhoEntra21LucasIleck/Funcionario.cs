@@ -30,7 +30,9 @@ namespace TrabalhoEntra21LucasIleck
         {
             foreach (var item in HistoricoDeTrabalhos)
             {
-                Console.WriteLine($"Hora Trabalhada: {item.HorasTrabalhadaNoDia} | Ganho do Dia: {item.SalarioGanhoDia.ToString("C", CultureInfo.CurrentCulture)}");
+                Console.WriteLine($"Horario Entrada: {item.HoraEntrada} | Horario Saida: {item.HoraSaida}");
+                Console.WriteLine($"Quantidade de Horas Trabalhadas: {item.HorasTrabalhadaNoDia} | Ganho do Dia: {item.SalarioGanhoDia}");
+                Console.WriteLine("¨================================================================================================");
             }
         }
         public void MostraCargoSalario()
@@ -45,34 +47,26 @@ namespace TrabalhoEntra21LucasIleck
         }
         public void BaterPonto(int hrEntrada, int hrSaida)
         {
-            double valorGanho = 0;
-            int horasTrabalhada;
-            if (hrEntrada > hrSaida)
-            {
-                horasTrabalhada = 24 - hrEntrada;
-                horasTrabalhada = horasTrabalhada + hrSaida;
-                valorGanho = horasTrabalhada * SalarioHours;
-                SetSaldo(GetSaldo() + valorGanho);
-            }
-            else
-            {
-                horasTrabalhada = hrSaida - hrEntrada;
-                valorGanho = horasTrabalhada * SalarioHours;
-                SetSaldo(GetSaldo() + valorGanho);
-            }
-            HistoricoDeTrabalho historico = new HistoricoDeTrabalho(horasTrabalhada, valorGanho);
-            HistoricoDeTrabalhos.Add(historico);
+            double valorGanho;           
+            int horasTrabalhada = hrSaida - hrEntrada;
+            valorGanho = horasTrabalhada * SalarioHours;
+            SetSaldo(GetSaldo() + valorGanho);
 
+            HistoricoDeTrabalho historico = new HistoricoDeTrabalho(horasTrabalhada, hrEntrada, hrSaida, valorGanho);
+            HistoricoDeTrabalhos.Add(historico);
         }
         public void BaterPonto30Vezes()
         {
             Random ran = new Random();
             for (int i = 0; i < 30; i++)
             {
-
-                int hrEntrada = ran.Next(7, 21);
-                int hrSaida = ran.Next(7, 21);
-
+                int hrEntrada;
+                int hrSaida;
+                do
+                {
+                    hrEntrada = ran.Next(7, 21);
+                    hrSaida = ran.Next(7, 21);
+                } while (hrEntrada >= hrSaida);                
                 BaterPonto(hrEntrada, hrSaida);
             }
         }
