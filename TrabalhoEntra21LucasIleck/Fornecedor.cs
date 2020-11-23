@@ -32,9 +32,10 @@ namespace TrabalhoEntra21LucasIleck
         {
             Console.WriteLine("Quantidade Fornecida ao Mês: {0}", QuantidadeFornecidaMes);
         }
-        public void DefineQuantidadeFornecida(int quantidadeFornecida)
+        public void DefineQuantidadeFornecida(int quantidadeFornecida, int tipoProduto)
         {
             QuantidadeFornecidaMes = quantidadeFornecida;
+            TipoProduto = tipoProduto;
         }
     }
 }
