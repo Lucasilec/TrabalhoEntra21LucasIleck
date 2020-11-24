@@ -512,8 +512,9 @@ namespace TrabalhoEntra21LucasIleck
         }
         public static void CalcularLucro()
         {
-            double lucroTotal = 0;
+
             //Calcular Ganho
+            double lucroTotal = 0;
             double valorGastoClienteSocio = 0;
             double valorGastoClienteNormal = 0;
             foreach (var item in ClienteNormalsList)
@@ -525,8 +526,9 @@ namespace TrabalhoEntra21LucasIleck
                 valorGastoClienteSocio += item.GetSaldo();
             }
             lucroTotal = valorGastoClienteSocio + valorGastoClienteNormal;
+            Console.WriteLine("Lucro Total: {0}", lucroTotal);
             // Calcular Prejuizo
-            double Prejuizo = 0;
+            //double PrejuizoRDSocio = 0;
             double SalarioFuncionarios = 0;
             double ValorProdutosFornecidos = 0;
             foreach (var item in FuncionariosList)
@@ -537,7 +539,15 @@ namespace TrabalhoEntra21LucasIleck
             {
                 ValorProdutosFornecidos += (FuncoesBase.ValorProduto(item.TipoProduto) * item.QuantidadeFornecidaMes);
             }
-            Prejuizo = valorGastoClienteSocio - (SalarioFuncionarios + ValorProdutosFornecidos);
+            double valorTTPreju = (SalarioFuncionarios + ValorProdutosFornecidos);
+            Console.WriteLine("Gasto Total: {0}", valorTTPreju);
+            Console.WriteLine();
+                  
+            if (((lucroTotal - valorTTPreju) - (lucroTotal - valorTTPreju) * (FuncoesBase.AcoesTotais() / 100)) > 0)
+            {
+                Console.WriteLine((lucroTotal - valorTTPreju) - (lucroTotal - valorTTPreju) * (FuncoesBase.AcoesTotais() / 100));
+            }
+            Console.ReadLine();
         }
         public static bool Sair(int escolha)
         {

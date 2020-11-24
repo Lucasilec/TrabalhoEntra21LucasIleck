@@ -255,5 +255,14 @@ namespace TrabalhoEntra21LucasIleck
             }
             return cnpjRepetido;
         }
+        public static double AcoesTotais()
+        {
+            double totalAcoes = 0;
+            foreach (var item in FuncoesMenu.ClienteSociosList)
+            {
+                totalAcoes += item.GetQtdAcoes();
+            }
+            return totalAcoes;
+        }
     }
 }
