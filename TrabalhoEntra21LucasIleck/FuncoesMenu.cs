@@ -541,13 +541,26 @@ namespace TrabalhoEntra21LucasIleck
             }
             double valorTTPreju = (SalarioFuncionarios + ValorProdutosFornecidos);
             Console.WriteLine("Gasto Total: {0}", valorTTPreju);
-            Console.WriteLine();
-                  
-            if (((lucroTotal - valorTTPreju) - (lucroTotal - valorTTPreju) * (FuncoesBase.AcoesTotais() / 100)) > 0)
+            valorTTPreju = valorTTPreju - (valorTTPreju * (FuncoesBase.AcoesTotais() / 100));
+            Console.WriteLine("Valor prejuizo Reduzido por Socios: {0}", valorTTPreju);
+            double ValorFinal1 = lucroTotal - valorTTPreju;
+            if (ValorFinal1 > 0)
             {
-                Console.WriteLine((lucroTotal - valorTTPreju) - (lucroTotal - valorTTPreju) * (FuncoesBase.AcoesTotais() / 100));
+                Console.WriteLine("Saldo Positivo");
+                Console.WriteLine("Valor ganho dos Socios: {0}", ValorFinal1 * (FuncoesBase.AcoesTotais() / 100));
+                ValorFinal1 = ValorFinal1 - (ValorFinal1 * (FuncoesBase.AcoesTotais() / 100));
+                Console.WriteLine("Lucro Final: {0}", ValorFinal1);
             }
-            Console.ReadLine();
+            else if (ValorFinal1 < 0)
+            {
+                Console.WriteLine("Saldo Negativo");
+                Console.WriteLine(ValorFinal1);
+            }
+            
+            Console.WriteLine();
+            Console.In.ReadLine();
+                  
+            
         }
         public static bool Sair(int escolha)
         {
