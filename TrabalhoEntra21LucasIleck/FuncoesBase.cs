@@ -264,5 +264,98 @@ namespace TrabalhoEntra21LucasIleck
             }
             return totalAcoes;
         }
+        public static void ResetValores()
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                switch (i)
+                {
+                    case 1:
+                        foreach (var item in FuncoesMenu.ClienteNormalsList)
+                        {
+                            item.SetSaldo(0);
+                        }
+                        break;
+                    case 2:
+                        foreach (var item in FuncoesMenu.ClienteSociosList)
+                        {
+                            item.SetSaldo(0);
+                        }
+                        break;
+                    case 3:
+                        foreach (var item in FuncoesMenu.FuncionariosList)
+                        {
+                            item.SetSaldo(0);
+                        }
+                        break;
+                    case 4:
+                        foreach (var item in FuncoesMenu.FornecedorsList)
+                        {
+                            int quantidadeInteira = 0;
+                            Console.WriteLine(item.QuantidadeFornecidaMes);
+                            double valorAuxArmaz = item.QuantidadeFornecidaMes / 2;
+                            for (int j = 1; j <= valorAuxArmaz; j++)
+                            {
+                                quantidadeInteira += j;
+                            }
+                            item.QuantidadeFornecidaMes = item.QuantidadeFornecidaMes - item.QuantidadeFornecidaMes;
+                            double sobras = valorAuxArmaz - quantidadeInteira;
+                            if (sobras > 0 && sobras < 1)
+                            {
+                                quantidadeInteira += 1;
+                            }
+                            item.QuantidadeFornecidaMes = quantidadeInteira;
+                            Console.WriteLine(item.QuantidadeFornecidaMes);
+                        }
+                        break;
+                }
+            }
+        }
+        public static void MostrarDadosGerais()
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                switch (i)
+                {
+                    case 1:
+                        Console.WriteLine("Cliente Normal");
+                        foreach (var item in FuncoesMenu.ClienteNormalsList)
+                        {
+                            
+                            item.MostrarDados();
+                        }
+                        Console.WriteLine();
+                        break;
+                    case 2:
+                        Console.WriteLine("Cliente Socio");
+                        foreach (var item in FuncoesMenu.ClienteSociosList)
+                        {
+                            item.MostrarDados();
+                            item.MostraAcoes();
+                        }
+                        Console.WriteLine();
+                        break;
+                    case 3:
+                        Console.WriteLine("Funcionario");
+                        foreach (var item in FuncoesMenu.FuncionariosList)
+                        {
+                            item.MostrarDados();
+                            item.MostraCargoSalario();
+                        }
+                        Console.WriteLine();
+                        break;
+                    case 4:
+                        Console.WriteLine("Fornecedor");
+                        foreach (var item in FuncoesMenu.FornecedorsList)
+                        {
+                            item.MostrarDados();
+                            item.MostraQuantidadeFornecida();
+                        }
+                        break;
+                }
+                Console.WriteLine("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+            }
+            Console.In.ReadLine();
+        }
     }
 }

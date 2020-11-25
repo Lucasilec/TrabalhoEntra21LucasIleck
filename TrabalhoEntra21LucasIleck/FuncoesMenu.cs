@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -40,6 +41,9 @@ namespace TrabalhoEntra21LucasIleck
                     Thread.Sleep(3000);
                     Environment.Exit(0);
                     break;
+                case 8:
+                    FuncoesBase.MostrarDadosGerais();
+                    break;
             }
         }
         public static void Adicionar()
@@ -65,7 +69,17 @@ namespace TrabalhoEntra21LucasIleck
                         Console.WriteLine("Entre com o nome do Cliente Normal: ");
                         string nomeClienteNormal = Console.In.ReadLine();
                         Console.WriteLine("Insira o CPF do cliente Normal: ");
-                        string cpfClienteNormal = Console.In.ReadLine();
+                        bool verificar3;
+                        string cpfClienteNormal = "";
+                        do
+                        {
+                            string cnpjAux = Console.In.ReadLine();
+                            verificar3 = FuncoesBase.VerificarCPF(cnpjAux, ClienteNormalsList, ClienteSociosList, FuncionariosList);
+                            if (verificar3 == true)
+                            {
+                                cpfClienteNormal = cnpjAux;
+                            }
+                        } while (!verificar3);
                         Console.WriteLine("Insira a idade do Cliente Normal: ");
                         int idadeClienteNormal = int.Parse(Console.In.ReadLine());
 
@@ -81,7 +95,17 @@ namespace TrabalhoEntra21LucasIleck
                             Console.WriteLine("Insira o nome do Cliente Socio: ");
                             string nomeClienteSocio = Console.In.ReadLine();
                             Console.WriteLine("Insira o CPF do cliente Sicio: ");
-                            string cpfClienteSocio = Console.In.ReadLine();
+                            bool verificar2;
+                            string cpfClienteSocio = "";
+                            do
+                            {
+                                string cnpjAux = Console.In.ReadLine();
+                                verificar2 = FuncoesBase.VerificarCPF(cnpjAux, ClienteNormalsList, ClienteSociosList, FuncionariosList);
+                                if (verificar2 == true)
+                                {
+                                    cpfClienteSocio = cnpjAux;
+                                }
+                            } while (!verificar2);
                             Console.WriteLine("Insira a Idade do Cliente Socio: ");
                             int idadeClienteSocio = int.Parse(Console.In.ReadLine());
 
@@ -101,7 +125,17 @@ namespace TrabalhoEntra21LucasIleck
                         Console.WriteLine("Insira o nome do funcionario: ");
                         string nomeFuncionario = Console.In.ReadLine();
                         Console.WriteLine("Insira o CPF do funcionario: ");
-                        string cpfFuncionario = Console.In.ReadLine();
+                        bool verificar1;
+                        string cpfFuncionario = "";
+                        do
+                        {
+                            string cnpjAux = Console.In.ReadLine();
+                            verificar1 = FuncoesBase.VerificarCPF(cnpjAux, ClienteNormalsList, ClienteSociosList, FuncionariosList);
+                            if (verificar1 == true)
+                            {
+                                cpfFuncionario = cnpjAux;
+                            }
+                        } while (!verificar1);
                         Console.WriteLine("Insira a idade do funcionario: ");
                         int idadeFuncionario = int.Parse(Console.In.ReadLine());
                         Console.WriteLine("Insira o Saldo do Funcionario: ");
@@ -121,7 +155,17 @@ namespace TrabalhoEntra21LucasIleck
                         Console.WriteLine("Insira o nome do Fornecedor: ");
                         string nomeFornecedor = Console.In.ReadLine();
                         Console.WriteLine("Insira o Cnpj do Fornecedor: ");
-                        string cnpjFornecedor = Console.In.ReadLine();
+                        string cnpjFornecedor = "";
+                        bool verificar;
+                        do
+                        {
+                            string cnpjAux = Console.In.ReadLine();
+                            verificar = FuncoesBase.VerificarCNPJ(cnpjAux, FornecedorsList);
+                            if (verificar == true)
+                            {
+                                cnpjFornecedor = cnpjAux;
+                            }
+                        } while (!verificar);                                          
                         Console.WriteLine("Insira o Tipo de Produto: ");
                         int tipoProduto = int.Parse(Console.In.ReadLine());
                         Console.WriteLine("Insira a quantidade fornecida ao Mês: ");
@@ -526,7 +570,9 @@ namespace TrabalhoEntra21LucasIleck
                 valorGastoClienteSocio += item.GetSaldo();
             }
             lucroTotal = valorGastoClienteSocio + valorGastoClienteNormal;
-            Console.WriteLine("Lucro Total: {0}", lucroTotal);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Lucro Total: {0}", lucroTotal.ToString("C", CultureInfo.CurrentCulture));
+            Console.ForegroundColor = ConsoleColor.White;
             // Calcular Prejuizo
             //double PrejuizoRDSocio = 0;
             double SalarioFuncionarios = 0;
@@ -540,24 +586,46 @@ namespace TrabalhoEntra21LucasIleck
                 ValorProdutosFornecidos += (FuncoesBase.ValorProduto(item.TipoProduto) * item.QuantidadeFornecidaMes);
             }
             double valorTTPreju = (SalarioFuncionarios + ValorProdutosFornecidos);
-            Console.WriteLine("Gasto Total: {0}", valorTTPreju);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Gasto Total: {0}", valorTTPreju.ToString("C", CultureInfo.CurrentCulture));
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("=======================================================================");
+            Console.WriteLine("Ações Totais: {0}%", FuncoesBase.AcoesTotais());
+            double ValorArcado = valorTTPreju * (FuncoesBase.AcoesTotais() / 100);
+            Console.WriteLine("Valor arcado pelos socios: {0}", ValorArcado.ToString("C", CultureInfo.CurrentCulture));
+            Console.WriteLine("=======================================================================");
             valorTTPreju = valorTTPreju - (valorTTPreju * (FuncoesBase.AcoesTotais() / 100));
-            Console.WriteLine("Valor prejuizo Reduzido por Socios: {0}", valorTTPreju);
+            Console.WriteLine("Valor prejuizo Reduzido por Socios: {0}", valorTTPreju.ToString("C", CultureInfo.CurrentCulture));
+            Console.WriteLine("=======================================================================");
             double ValorFinal1 = lucroTotal - valorTTPreju;
             if (ValorFinal1 > 0)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Saldo Positivo");
-                Console.WriteLine("Valor ganho dos Socios: {0}", ValorFinal1 * (FuncoesBase.AcoesTotais() / 100));
+                Console.ForegroundColor = ConsoleColor.White;
+                double valorGanhoSocio = ValorFinal1 * (FuncoesBase.AcoesTotais() / 100);
+                Console.WriteLine("=======================================================================");
+                Console.WriteLine("Valor ganho dos Socios: {0}", valorGanhoSocio.ToString("C", CultureInfo.CurrentCulture));
+                Console.WriteLine("=======================================================================");
                 ValorFinal1 = ValorFinal1 - (ValorFinal1 * (FuncoesBase.AcoesTotais() / 100));
-                Console.WriteLine("Lucro Final: {0}", ValorFinal1);
+                Console.WriteLine("Saldo Da Loja: {0}", ValorFinal1);
+                Console.WriteLine("=======================================================================");
+                Program.CAIXA += ValorFinal1;
             }
             else if (ValorFinal1 < 0)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Saldo Negativo");
-                Console.WriteLine(ValorFinal1);
-            }
-            
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Saldo Da Loja: {0}",ValorFinal1);
+                Console.WriteLine("=======================================================================");
+                Program.CAIXA += ValorFinal1;
+            }         
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Valor Caixa: {0}", Program.CAIXA.ToString("C", CultureInfo.CurrentCulture));
+            Console.ForegroundColor = ConsoleColor.White;
+            FuncoesBase.ResetValores();
             Console.In.ReadLine();
                   
             

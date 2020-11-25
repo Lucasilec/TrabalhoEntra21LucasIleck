@@ -8,7 +8,7 @@ namespace TrabalhoEntra21LucasIleck
 {
     class Program
     {
-        
+        public static double CAIXA { get; set; }
         static void Main(string[] args)           
         {
             //iniciar Projeto
@@ -38,6 +38,7 @@ namespace TrabalhoEntra21LucasIleck
                 Console.WriteLine("5 - ALTERAR");
                 Console.WriteLine("6 - CALCULAR LUCRO");
                 Console.WriteLine("7 - SAIR");
+                Console.WriteLine("8 - Mostrar Dados Gerais");
                 int escolhaOpcao = int.Parse(Console.In.ReadLine());
                 FuncoesMenu.Escolha(escolhaOpcao);
             } while (true);
